@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { GlobalStyles } from '../../constants/styles';
 
-const InputList = () => {
+const InputList = ({ selectHandler }) => {
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState(null);
 	const [items, setItems] = useState([
@@ -18,6 +18,9 @@ const InputList = () => {
 		{ label: 'Others', value: 'other' },
 	]);
 
+	const handleChange = (value) => {
+		selectHandler(value);
+	};
 	return (
 		<View style={styles.container}>
 			<Text style={styles.label}>Category</Text>
@@ -40,6 +43,9 @@ const InputList = () => {
 				}}
 				dropDownContainerStyle={{
 					backgroundColor: GlobalStyles.colors.primary100,
+				}}
+				onSelectItem={({ value }) => {
+					handleChange(value);
 				}}
 			/>
 		</View>

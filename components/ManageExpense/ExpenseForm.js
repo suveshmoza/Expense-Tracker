@@ -12,13 +12,28 @@ const ExpenseForm = ({ onCancel, onSubmit, submitButtonLabel }) => {
 		category: '',
 	});
 
+	const updateCategory = (selectedCategory) => {
+		setInputValues((currInputValues) => {
+			return { ...currInputValues, category: selectedCategory };
+		});
+	};
+
 	const inputChangeHandler = (inputIdentifier, enteredValue) => {
 		setInputValues((currInputValues) => {
 			return { ...currInputValues, [inputIdentifier]: enteredValue };
 		});
 	};
 
-	const submitHandler = () => {};
+	const submitHandler = () => {
+		const expenseData = {
+			amount: +inputValues.amount,
+			date: new Date(inputValues.date),
+			description: inputValues.description,
+			category: inputValues.category,
+		};
+
+		onSubmit(expenseData);
+	};
 
 	return (
 		<View style={styles.form}>
@@ -44,7 +59,7 @@ const ExpenseForm = ({ onCancel, onSubmit, submitButtonLabel }) => {
 					style={styles.rowInput}
 				/>
 			</View>
-			<InputList />
+			<InputList selectHandler={updateCategory} />
 			<Input
 				label="Description"
 				textInputConfig={{
