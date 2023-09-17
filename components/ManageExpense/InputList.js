@@ -4,9 +4,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { GlobalStyles } from '../../constants/styles';
 
-const InputList = ({ selectHandler }) => {
+const InputList = ({ selectHandler, defaultValue }) => {
 	const [open, setOpen] = useState(false);
-	const [value, setValue] = useState(null);
+	const [value, setValue] = useState(defaultValue ? defaultValue : null);
 	const [items, setItems] = useState([
 		{ label: 'Shopping', value: 'shopping' },
 		{ label: 'Flight', value: 'flight' },

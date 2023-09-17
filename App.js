@@ -18,9 +18,18 @@ function ExpensesOverview() {
 	return (
 		<BottomTabs.Navigator
 			screenOptions={({ navigation }) => ({
-				headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+				headerStyle: {
+					backgroundColor: GlobalStyles.colors.primary500,
+					elevation: 0,
+				},
 				headerTintColor: 'white',
-				tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+				tabBarStyle: {
+					backgroundColor: GlobalStyles.colors.primary500,
+					height: 60,
+					borderTopWidth: 0,
+					justifyContent: 'center',
+					alignItems: 'center',
+				},
 				tabBarActiveTintColor: GlobalStyles.colors.accent500,
 				headerRight: ({ tintColor }) => (
 					<IconButton
