@@ -2,12 +2,14 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { getFormattedDate } from '../../util/date';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
+import { getIconName } from '../../util/getIcon';
 
-const ExpenseItem = ({ id, description, date, amount }) => {
+const ExpenseItem = ({ id, description, date, amount, category }) => {
 	const navigation = useNavigation();
 
 	const expenseHandler = () => {
-		navigation.navigate('ManageExpenses', {
+		navigation.navigate('ManageExpense', {
 			expenseId: id,
 		});
 	};
@@ -21,12 +23,17 @@ const ExpenseItem = ({ id, description, date, amount }) => {
 				}}
 				style={({ pressed }) => pressed && styles.pressed}
 			>
-				<View style={styles.expenseItem}>
-					<View>
-						<Text style={[styles.textBase, styles.description]}>
-							{description}
-						</Text>
-						<Text style={styles.textBase}>{getFormattedDate(date)}</Text>
+				<View style={styles.expenseItemContainer}>
+					<View style={styles.expenseItemDetailContainer}>
+						<View style={styles.categoryIcon}>
+							<Ionicons name={getIconName(category)} size={28} color="white" />
+						</View>
+						<View>
+							<Text style={[styles.textBase, styles.description]}>
+								{description}
+							</Text>
+							<Text style={styles.textBase}>{getFormattedDate(date)}</Text>
+						</View>
 					</View>
 					<View style={styles.amountContainer}>
 						<Text style={styles.amount}>₹{amount.toFixed(2)}</Text>
@@ -48,7 +55,7 @@ const styles = StyleSheet.create({
 	pressed: {
 		opacity: 0.75,
 	},
-	expenseItem: {
+	expenseItemContainer: {
 		padding: 12,
 		backgroundColor: GlobalStyles.colors.primary500,
 		flexDirection: 'row',
@@ -79,5 +86,16 @@ const styles = StyleSheet.create({
 	amount: {
 		color: GlobalStyles.colors.primary500,
 		fontWeight: 'bold',
+	},
+	expenseItemDetailContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	categoryIcon: {
+		// backgroundColor: 'red',
+		paddingVertical: 6,
+		paddingHorizontal: 3,
+		marginRight: 4,
 	},
 });
